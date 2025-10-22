@@ -1,10 +1,10 @@
-## 🎯 About The Project
+## About The Project
 
 This project provides a robust and secure solution for a common enterprise requirement: allowing users to log in to a custom web application using their existing Microsoft work or school accounts.
 
 The architecture is completely decoupled, with a modern Single-Page Application (SPA) in React and a secure API in FastAPI, making it scalable and easy to maintain. Unlike many examples that rely on high-level abstractions, this project demonstrates **explicit JWT validation**, giving you full control and understanding of the security flow.
 
-### ✨ Key Features
+### Key Features
 
 -   **Single Sign-On (SSO):** Authenticates users against a single Microsoft Entra ID tenant.
 -   **Modern Frontend:** Built with **React** and hooks, using `@azure/msal-react` to handle the OAuth 2.0 Authorization Code Flow with PKCE.
@@ -14,7 +14,7 @@ The architecture is completely decoupled, with a modern Single-Page Application 
 -   **Automatic Token Renewal:** Provides a seamless user experience by silently refreshing access tokens in the background.
 -   **Production-Ready:** Includes best practices like environment variable management, a complete `.gitignore`, and a CORS policy.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 -   **Frontend:**
     -   [React](https://reactjs.org/)
@@ -29,7 +29,7 @@ The architecture is completely decoupled, with a modern Single-Page Application 
     -   [Microsoft Entra ID (Azure AD)](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id)
     -   OAuth 2.0 & OpenID Connect (OIDC)
 
-## 🚀 Getting Started
+## Getting Started
 
 To get a local copy up and running, follow these steps.
 
@@ -102,7 +102,7 @@ npm install
 # values (clientId, tenantId, and appId URI) from your Azure App Registration.
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 For the application to work, you must provide the necessary credentials from your Azure App Registration.
 
@@ -118,7 +118,7 @@ For the application to work, you must provide the necessary credentials from you
 
 You need to edit the `msalConfig` and `loginRequest` objects directly in this file with the same values from Azure.
 
-## ▶️ Usage
+## Usage
 
 After completing the configuration, you can run the application.
 
@@ -139,7 +139,7 @@ After completing the configuration, you can run the application.
 
 Now, you can click the "Login" button and authenticate using your Azure AD account.
 
-## 🔑 Authentication Flow
+## Authentication Flow
 
 1.  The user clicks "Login" in the React app.
 2.  MSAL redirects the user to the Microsoft login page.
