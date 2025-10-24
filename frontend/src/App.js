@@ -38,7 +38,6 @@ const PageLayout = (props) => {
     );
 };
 
-
 function App() {
     return (
         <PageLayout>

@@ -3,11 +3,9 @@ import { useMsal } from "@azure/msal-react";
 import { loginRequest, apiConfig } from "./authConfig";
 
 export const ProfileContent = () => {
-    const { instance, accounts } = useMsal();
-    
+    const { instance, accounts } = useMsal();    
     const [adminApiData, setAdminApiData] = useState(null);
     const [error, setError] = useState(null);
-
     const userName = accounts[0]?.name;
 
     useEffect(() => {

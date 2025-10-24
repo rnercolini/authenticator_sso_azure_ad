@@ -1,7 +1,6 @@
 import os
 import requests
 from typing import List, Dict
-
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, Security
 from fastapi.middleware.cors import CORSMiddleware
@@ -30,16 +29,12 @@ app.add_middleware(
 )
 
 oauth2_scheme = OAuth2AuthorizationCodeBearer(authorizationUrl="", tokenUrl="")
-
-
 class User(BaseModel):
     name: str
     roles: List[str]
     tid: str
 
-
-def get_jwks() -> Dict:
-    
+def get_jwks() -> Dict:    
     if not jwks_cache.get("keys"):
         print("Fetching new JWKS keys from Azure AD...")
         response = requests.get(AZURE_AD_JWKS_URI)
@@ -47,9 +42,7 @@ def get_jwks() -> Dict:
         jwks_cache["keys"] = response.json()["keys"]
     return jwks_cache["keys"]
 
-
-async def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict:
-    
+async def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict:    
     credentials_exception = HTTPException(
         status_code=401,
         detail="Unable to validate credentials",
@@ -68,6 +61,8 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict:
                     "n": key["n"],
                     "e": key["e"]
                 }
+                break
+            
         if not rsa_key:
             raise credentials_exception
 
@@ -84,9 +79,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict:
         print(f"JWT error: {e}")
         raise credentials_exception
 
-
 def require_role(required_role: str):
-    
     async def role_checker(user: dict = Depends(get_current_user)):
         user_roles = user.get("roles", [])
         if required_role not in user_roles:
@@ -97,11 +90,9 @@ def require_role(required_role: str):
         return user
     return role_checker
 
-
 @app.get("/")
 async def root():
     return {"message": "Public API accessible by everyone."}
-
 
 @app.get("/api/me", response_model=User)
 async def get_my_info(user: dict = Depends(get_current_user)):
@@ -110,7 +101,6 @@ async def get_my_info(user: dict = Depends(get_current_user)):
         roles=user.get("roles", []),
         tid=user.get("tid", "")
     )
-
 
 @app.get("/api/admin")
 async def get_admin_data(user: dict = Security(require_role("Admin"))):
